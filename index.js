@@ -48,6 +48,14 @@ app.post('/api/send-email', authenticateService, async (req, res) => {
     }
 });
 
+app.get('/health', (req, res) => {
+    res.status(200).json({ 
+        status: 'UP', 
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString()
+    });
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Email microservice running on port ${PORT}`);

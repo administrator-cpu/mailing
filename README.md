@@ -30,48 +30,12 @@ A lightweight Node.js microservice for sending transactional emails via [Resend]
 Create a `.env` file in the root of the project with the following variables:
 
 ```env
-RESEND_API_KEY=your_resend_api_key
 SERVICE_API_KEY=your_secret_service_key
-PORT=5000
 ```
 
 | Variable         | Required | Description                                      |
 |------------------|----------|--------------------------------------------------|
-| `RESEND_API_KEY` | Yes      | API key from your [Resend](https://resend.com) dashboard |
 | `SERVICE_API_KEY`| Yes      | Secret key used to authenticate incoming requests |
-| `PORT`           | No       | Port to run the server on (defaults to `5000`)   |
-
----
-
-## Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone <your-repo-url>
-cd <project-folder>
-```
-
-### 2. Install dependencies
-
-```bash
-npm install
-```
-
-### 3. Configure environment variables
-
-```bash
-cp .env.example .env
-# Fill in your values in .env
-```
-
-### 4. Start the server
-
-```bash
-node index.js
-```
-
-The server will start on `http://localhost:5000` (or your configured `PORT`).
 
 ---
 
@@ -164,19 +128,3 @@ curl https://mailing-rc5o.onrender.com/health
 ```
 
 ---
-
-## Project Structure
-
-```
-├── index.js        # Main application entry point
-├── .env            # Environment variables (not committed)
-├── .env.example    # Example environment variables
-├── package.json
-└── README.md
-```
-
----
-
-## License
-
-MIT

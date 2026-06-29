@@ -20,7 +20,7 @@ const authenticateService = (req, res, next) => {
 
 
 app.post('/api/send-email', authenticateService, async (req, res) => {
-    const { to, cc, subject, html, text, fromName = 'Fab Five' } = req.body;
+    const { to, cc, subject, html, text, bcc, fromName = 'Fab Five' } = req.body;
 
     if (!to || !subject) {
         return res.status(400).json({ 
@@ -33,6 +33,7 @@ app.post('/api/send-email', authenticateService, async (req, res) => {
             from: `${fromName} <no-reply@fab5network.com>`, 
             to,
             cc, 
+            bcc,
             subject,
             html: html || '', 
             text: text || ''  

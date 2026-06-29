@@ -9,7 +9,7 @@ A lightweight Node.js microservice for sending transactional emails via [Resend]
 ## Features
 
 - Send transactional emails with HTML and plain-text support
-- `To` and `CC` recipient support
+- `To`, `CC` and `BCC` recipient support
 - Bearer token authentication to protect the endpoint
 - Health check endpoint for uptime monitoring
 - Configurable sender display name
@@ -72,6 +72,7 @@ Sends an email via Resend.
 | `text`     | `string`         | No       | `""`          | Plain-text body of the email         |
 | `cc`       | `string / array` | No       | —             | CC recipient email address(es)       |
 | `fromName` | `string`         | No       | `"Fab Five"`  | Display name for the sender          |
+| `bcc`      | `string / array` | No       | —             | BCC recipient email address(es)      |
 
 **Example Request**
 

@@ -6,7 +6,7 @@ const cors = require('cors');
 const app = express();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-app.use(express.json());
+app.use(express.json({ limit: "25mb" }));
 app.use(cors());
 
 
@@ -20,7 +20,7 @@ const authenticateService = (req, res, next) => {
 
 
 app.post('/api/send-email', authenticateService, async (req, res) => {
-    const { to, cc, subject, html, text, bcc, fromName = 'Fab5 Connect' } = req.body;
+    const { to, cc, subject, html, text, bcc, fromName = 'Fab5 Connect', attachments } = req.body;
 
     if (!to || !subject) {
         return res.status(400).json({ 
@@ -36,7 +36,8 @@ app.post('/api/send-email', authenticateService, async (req, res) => {
             bcc,
             subject,
             html: html || '', 
-            text: text || ''  
+            text: text || '',
+            attachments
         });
         res.status(200).json({ success: true, messageId: data.id });
 

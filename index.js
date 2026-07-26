@@ -18,6 +18,33 @@ const authenticateService = (req, res, next) => {
     next();
 };
 
+app.post('/api/billing/send-email', authenticateService, async (req, res) => {
+    const { to, cc, subject, html, text, bcc, fromName = 'Fab5 Connect', attachments } = req.body;
+    if (!to || !subject) {
+        return res.status(400).json({
+            error: 'Bad Request: "to" and "subject" fields are required.'
+        });
+    }
+    try {
+        const data = await resend.emails.send({
+            from: `${fromName} <billing@fab5network.com>`,
+            to,
+            cc,
+            bcc,
+            subject,
+            html: html || '',
+            text: text || '',
+            attachments
+        });
+        res.status(200).json({ success: true, messageId: data.id });
+    } catch (error) {
+        console.error('Email Service Error:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message || 'Internal server error while sending email.'
+        });
+    }
+});
 
 app.post('/api/send-email', authenticateService, async (req, res) => {
     const { to, cc, subject, html, text, bcc, fromName = 'Fab5 Connect', attachments } = req.body;
